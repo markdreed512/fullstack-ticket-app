@@ -1,8 +1,27 @@
 from flask import Flask, render_template,request,redirect,url_for
 from forms import Todo
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'password'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tmp/test.db'
+db = SQLAlchemy(app)
+
+class TodoModel(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.String(240))
+
+    def __str__(self):
+        # will return string representation of the model:
+        return f'{self.content}, {self.id}'
+
+# db.create_all()
+# todo = TodoModel(content='learn flask')
+# db.session.add(todo)
+# db.session.commit()
+# todos= TodoModel.query.filter_by(id=1).first()
+# print(todos.id)
+# print(todos.content)
 
 @app.route('/',methods=['GET','POST'])
 def index():
