@@ -7,4 +7,7 @@
     {{ form.content }}
     {{ form.submit }}
 </form>
+{% for t in todo %}
+    <li>{{t.content}}</li>
+{% endfor %}
 {% endblock content %}

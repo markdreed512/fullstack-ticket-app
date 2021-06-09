@@ -19,21 +19,22 @@ class TodoModel(db.Model):
 # todo = TodoModel(content='learn flask')
 # db.session.add(todo)
 # db.session.commit()
-# todos= TodoModel.query.filter_by(id=1).first()
+# todos= TodoModel.query.filter_by(content='learn flask').first()
 # print(todos.id)
 # print(todos.content)
 
 @app.route('/',methods=['GET','POST'])
 def index():
     request_method = request.method
+    todo = TodoModel.query.all()
     if request.method == 'POST':
-        print('-------')
-        print(dict(request.form))
         first_name = request.form['first_name']
-        print('-------')
         return redirect(url_for('name', first_name=first_name))
-    return render_template('index.html', request_method=request_method)
+    return render_template('index.html', request_method=request_method, todo=todo)
 
+@app.route('/signup')
+def signup():
+    return render_template('signup.html')
 @app.route('/name/<string:first_name>')
 def name(first_name):
     return first_name
@@ -43,7 +44,14 @@ def name(first_name):
 def todo():
     todo_form = Todo()
     if todo_form.validate_on_submit():
+        print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')
         print(todo_form.content.data)
+        todo = TodoModel(content="just some test string") 
+       
+        # db.session.add(todo) 
+        # print('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&')
+        # db.session.commit()
+       
         return redirect('/')
     return render_template('todo.html', form=todo_form)
 
