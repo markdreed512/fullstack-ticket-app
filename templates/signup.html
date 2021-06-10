@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<form action="/dashboard">
-    <input type="text" placeholder="username">
-    <input type="text" placeholder="password">
+<h1>Sign up</h1>
+<form action="/register">
+    <input type="text" placeholder="choose a username"><br>
+    <input type="text" placeholder="enter password"><br>
+    <input type="text" placeholder="re-enter password"><br>
     <button type="submit">Sign Up</button>
 </form>
 

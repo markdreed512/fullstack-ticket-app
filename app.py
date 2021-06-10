@@ -35,6 +35,19 @@ def index():
 @app.route('/signup')
 def signup():
     return render_template('signup.html')
+
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
+@app.route('/register')
+def register():
+    success = False
+    if success == True:
+        return render_template('success.html')
+    else:
+        return render_template('failure.html')
+
 @app.route('/name/<string:first_name>')
 def name(first_name):
     return first_name
