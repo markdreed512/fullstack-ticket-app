@@ -1,4 +1,4 @@
-from flask import Flask, render_template,request,redirect,url_for
+from flask import Flask, render_template,request,redirect,url_for, jsonify
 from forms import Todo
 from flask_sqlalchemy import SQLAlchemy
 
@@ -7,17 +7,18 @@ app.config['SECRET_KEY'] = 'password'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tmp/test.db'
 db = SQLAlchemy(app)
 
-class TodoModel(db.Model):
+class UserModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    content = db.Column(db.String(240))
+    username = db.Column(db.String(240))
+    password = db.Column(db.String(240))
 
     def __str__(self):
         # will return string representation of the model:
-        return f'{self.content}, {self.id}'
+        return f'{self.username}, {self.password}, {self.id}'
 
 # db.create_all()
-# todo = TodoModel(content='learn flask')
-# db.session.add(todo)
+# user = UserModel(username='mark', password='passwerd')
+# db.session.add(user)
 # db.session.commit()
 # todos= TodoModel.query.filter_by(content='learn flask').first()
 # print(todos.id)
@@ -26,15 +27,16 @@ class TodoModel(db.Model):
 @app.route('/',methods=['GET','POST'])
 def index():
     request_method = request.method
-    todo = TodoModel.query.all()
-    if request.method == 'POST':
-        first_name = request.form['first_name']
-        return redirect(url_for('name', first_name=first_name))
-    return render_template('index.html', request_method=request_method, todo=todo)
+    user = UserModel.query.all()
+    # if request.method == 'POST':
+    #     first_name = request.form['first_name']
+    #     return redirect(url_for('name', first_name=first_name))
+    return render_template('index.html')
+    # return render_template('index.html', request_method=request_method, todo=todo)
 
 @app.route('/signup')
 def signup():
-    return render_template('signup.html')
+    return jsonify({"username": "mark", "password": "passwerd", "id": 1})
 
 @app.route('/dashboard')
 def dashboard():
@@ -53,7 +55,7 @@ def name(first_name):
     return first_name
 
 
-@app.route('/todo', methods=['GET','POST'])
+@app.route('/users', methods=['POST'])
 def todo():
     todo_form = Todo()
     if todo_form.validate_on_submit():

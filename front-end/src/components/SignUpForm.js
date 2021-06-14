@@ -1,16 +1,32 @@
 import React from 'react'
-import { Form } from "semantic-ui-react"
+import { Form, Button, FormGroup, Label, Input} from "reactstrap"
+import './css/SignUpForm.css'
+
 const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(e.target)
+    fetch('/signup').then(res => res.json()).then(data => console.log(data))
 }
 const SignUpForm = () => {
     return (
-        <Form onSubmit={handleSubmit} style={{width: "50%"}}>
-            <input placeholder="username"/>
-            <input placeholder="password"/>
-            <input placeholder="password"/>
-            <button>Sign Up</button>
+        <Form onSubmit={handleSubmit} id="signup-form">
+            <h1 className="text-center">Create Account</h1>
+            <FormGroup>
+                <Label for="email" >Email</Label>
+                <Input type="email" name="email" id="email" autoFocus/>
+            </FormGroup>
+            <FormGroup>
+                <Label for="username">Username</Label>
+                <Input type="username" name="username" id="username" placeholder="" />
+            </FormGroup>
+            <FormGroup>
+                <Label for="password1">Password</Label>
+                <Input type="password" name="password1" id="password1" placeholder="" />
+            </FormGroup>
+            <FormGroup>
+            <Label for="password2">Password</Label>
+                <Input type="password" name="password2" id="passwor21" placeholder="" />
+            </FormGroup>
+            <Button className="btn-lg btn-block my-3" id="submit-btn">Submit</Button>
         </Form>
     )
 }
