@@ -8,3 +8,8 @@
 #submit-btn{
     width: 100%;
 }
+#container{
+    width: 400px;
+    margin: 50px auto;
+    /* padding: */
+}

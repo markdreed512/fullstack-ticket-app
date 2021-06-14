@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Button, FormGroup, Label, Input} from "reactstrap"
+import { Card, Form, Button, FormGroup, Label, Input} from "reactstrap"
 import './css/SignUpForm.css'
 
 const handleSubmit = (e) => {
@@ -8,6 +8,7 @@ const handleSubmit = (e) => {
 }
 const SignUpForm = () => {
     return (
+        <Card id="container">
         <Form onSubmit={handleSubmit} id="signup-form">
             <h1 className="text-center">Create Account</h1>
             <FormGroup>
@@ -28,6 +29,7 @@ const SignUpForm = () => {
             </FormGroup>
             <Button className="btn-lg btn-block my-3" id="submit-btn">Submit</Button>
         </Form>
+        </Card>
     )
 }
 
