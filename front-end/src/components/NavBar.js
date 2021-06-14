@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './css/NavBar.css'
 import {
     Collapse,
     Navbar,
@@ -12,19 +13,19 @@ function NavBar() {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
     return (
-        <Navbar className="p-3" color="light" light expand="md">
-            <NavbarBrand >FixTix</NavbarBrand>
+        <Navbar id="navbar" className="p-3"  expand="md">
+            <NavbarBrand id="brand">FixTix</NavbarBrand>
             <NavbarToggler onClick={toggle}/>
             <Collapse isOpen={isOpen} navbar>
                 <Nav className="mr-auto" navbar>
                     <NavItem>
-                        <NavLink >Dashboard</NavLink>
+                        <NavLink className="nav-link">Dashboard</NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink>My Tickets</NavLink>
+                        <NavLink className="nav-link">My Tickets</NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink>Login</NavLink>
+                        <NavLink className="nav-link">Login</NavLink>
                     </NavItem>
                 </Nav>
             </Collapse>
